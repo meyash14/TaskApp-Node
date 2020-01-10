@@ -23,14 +23,14 @@
         //             console.log(result.ops)
         //  })
 
-        db.collection('users').insertMany([
+        db.collection('tasks').insertMany([
             {
-            name: 'AB',
-            age:24 
+            description: 'Clean House',
+            completed:true 
             },
             {
-                name: 'Je',
-                age: 25
+                description: 'Je',
+                completed: false
             }
 
         ],(error,result) => {
