@@ -38,8 +38,19 @@ app.get('/users',(req,res) => {
     User.find({}).then((users) => {
         res.send(users)
     }).catch((e) => {
-        res.send(e)
+        res.status(500).send() // service down status 500
     })
+
+})
+
+//get individual user by id using route parameter for id
+app.get('/users/:id',(req,res) => {
+    User.findById(req.params.id).then((user) => { //req.params contains all the route parameters
+        res.send(user)
+    }).catch((e) => {
+        res.status(404).send()
+    })
+    
 
 })
 
