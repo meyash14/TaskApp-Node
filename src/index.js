@@ -43,17 +43,37 @@ app.get('/users',(req,res) => {
 
 })
 
-//get individual user by id using route parameter for id
+//get individual user by id using route parameter for id,mongoose converts the sting id it gets to object id
 app.get('/users/:id',(req,res) => {
     User.findById(req.params.id).then((user) => { //req.params contains all the route parameters
         res.send(user)
     }).catch((e) => {
         res.status(404).send()
     })
-    
-
 })
 
+//getting multiple tasks
+app.get('/tasks',(req,res) => {
+    Task.find({}).then((task) => {
+        res.send(task)
+    }).catch((e) => {
+        res.status(500).send()
+    })
+})
+
+//getting task by id
+app.get('/tasks/:id',(req,res) => {
+    const _id = req.params.id
+    Task.findById(_id).then((task) => {
+        if(!task)
+        {
+           return res.status(404).send()
+        }
+        res.send(task)
+    }).catch((e) => {
+        res.status(500).send()
+    })
+})
 app.listen(port, () => {
     console.log('Server is up on port ' + port)
 })
